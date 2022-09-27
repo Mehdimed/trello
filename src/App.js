@@ -1,24 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import {
+  Routes,
+  Route
+} from "react-router-dom";
+import {Home, About , User} from './routes';
+import Layout from './components/Layout';
+import { falseData } from "./utils/db.js";
+import React, { useState } from "react";
+
+// create a context
+export const TabsContext = React.createContext();
+
 
 function App() {
+  const [tabs, setTabs] = useState(falseData);
+  const [activeTab, setActiveTab] = useState(tabs[0]);
+
+  const updateActiveTab = (tab) => {
+    setActiveTab(tab);
+  };
+
+  function updateTabs(tabs) {
+    setTabs(tabs);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <TabsContext.Provider value={{ tabs, updateTabs , activeTab, updateActiveTab }}>
+      <Layout>
+        <Routes>
+          <Route path="/about" element={<About />} />
+          <Route path="/user" element={<User />} />
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </Layout>
+    </TabsContext.Provider>
   );
 }
 
