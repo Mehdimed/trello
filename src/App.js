@@ -4,16 +4,25 @@ import {
 } from "react-router-dom";
 import {Home, About , User} from './routes';
 import Layout from './components/Layout';
-import { falseData } from "./utils/db.js";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 // create a context
 export const TabsContext = React.createContext();
 
 
 function App() {
-  const [tabs, setTabs] = useState(falseData);
-  const [activeTab, setActiveTab] = useState(tabs[0]);
+  const [tabs, setTabs] = useState([]);
+  const [activeTab, setActiveTab] = useState({});
+
+  useEffect(() => {
+    fetch("http://localhost:3000/tabs")
+      .then((res) => res.json())
+      .then((data) => {
+        updateTabs(data);
+        updateActiveTab(data[0]);
+      });
+
+  }, []);
 
   const updateActiveTab = (tab) => {
     setActiveTab(tab);

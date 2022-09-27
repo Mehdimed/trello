@@ -1,0 +1,201 @@
+{
+  "tabs": [
+    {
+      "id": 1,
+      "title": "les animaux",
+      "lists": [
+        {
+          "id": 1,
+          "title": "les mammifères",
+          "cards": [
+            {
+              "id": 1,
+              "title": "Chien",
+              "description": "Description du chien"
+            },
+            {
+              "id": 2,
+              "title": "Chat",
+              "description": "Description du chat"
+            },
+            {
+              "id": 3,
+              "title": "Lapin",
+              "description": "Description du lapin"
+            },
+            {
+              "id": 4,
+              "title": "Lion",
+              "description": "Description du lion"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "title": "les oiseaux",
+          "cards": [
+            {
+              "id": 5,
+              "title": "Pigeon",
+              "description": "Description du pigeon"
+            },
+            {
+              "id": 6,
+              "title": "Aigle",
+              "description": "Description de l'aigle"
+            },
+            {
+              "id": 7,
+              "title": "Poule",
+              "description": "Description de la poule"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "title": "les poissons",
+          "cards": [
+            {
+              "id": 8,
+              "title": "Requin",
+              "description": "Description du requin"
+            },
+            {
+              "id": 9,
+              "title": "Poisson rouge",
+              "description": "Description du poisson rouge"
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "title": "les reptiles",
+          "cards": [
+            {
+              "id": 10,
+              "title": "Serpent",
+              "description": "Description du serpent"
+            },
+            {
+              "id": 11,
+              "title": "Tortue",
+              "description": "Description de la tortue"
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "title": "les insectes",
+          "cards": [
+            {
+              "id": 12,
+              "title": "Coccinelle",
+              "description": "Description de la coccinelle"
+            },
+            {
+              "id": 13,
+              "title": "Araignée",
+              "description": "Description de l'araignée"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "les fruits",
+      "lists": [
+        {
+          "id": 6,
+          "title": "les fruits rouges",
+          "cards": [
+            {
+              "id": 14,
+              "title": "Fraise",
+              "description": "Description de la fraise"
+            },
+            {
+              "id": 15,
+              "title": "Cerise",
+              "description": "Description de la cerise"
+            },
+            {
+              "id": 16,
+              "title": "Groseille",
+              "description": "Description de la groseille"
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "title": "les fruits jaunes",
+          "cards": [
+            {
+              "id": 17,
+              "title": "Banane",
+              "description": "Description de la banane"
+            },
+            {
+              "id": 18,
+              "title": "Citron",
+              "description": "Description du citron"
+            },
+            {
+              "id": 19,
+              "title": "Pomme",
+              "description": "Description de la pomme"
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "title": "les fruits verts",
+          "cards": [
+            {
+              "id": 20,
+              "title": "Poire",
+              "description": "Description de la poire"
+            },
+            {
+              "id": 21,
+              "title": "Kiwi",
+              "description": "Description du kiwi"
+            }
+          ]
+        },
+        {
+          "id": 9,
+          "title": "les fruits blancs",
+          "cards": [
+            {
+              "id": 22,
+              "title": "Pêche",
+              "description": "Description de la pêche"
+            },
+            {
+              "id": 23,
+              "title": "Pomme",
+              "description": "Description de la pomme"
+            }
+          ]
+        },
+        {
+          "id": 10,
+          "title": "les fruits noirs",
+          "cards": [
+            {
+              "id": 24,
+              "title": "Mûre",
+              "description": "Description de la mûre"
+            },
+            {
+              "id": 25,
+              "title": "Cassis",
+              "description": "Description du cassis"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

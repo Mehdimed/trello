@@ -2,7 +2,7 @@ import React from "react";
 import { TabsContext } from "../App.js";
 import styled from "styled-components";
 import List from "../components/List.js";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { DragDropContext } from "react-beautiful-dnd";
 
 
 const Container = styled.div`
@@ -26,10 +26,10 @@ export default function Home() {
         const newTab = { ...activeTab };
         const sourceId = result.source.droppableId.split("-")[1];
         const destinationId = result.destination.droppableId.split("-")[1];        
-        const sourceList = newTab.tab.find((list) => list.id.toString() === sourceId);
-        const destinationList = newTab.tab.find((list) => list.id.toString() === destinationId);
-        const [removed] = sourceList.list.splice(result.source.index, 1);
-        destinationList.list.splice(result.destination.index, 0, removed);
+        const sourceList = newTab.lists.find((list) => list.id.toString() === sourceId);
+        const destinationList = newTab.lists.find((list) => list.id.toString() === destinationId);
+        const [removed] = sourceList.cards.splice(result.source.index, 1);
+        destinationList.cards.splice(result.destination.index, 0, removed);
 
         const newTabs = [...tabs].map((tab) => {
             if (tab.id === newTab.id) {
@@ -40,7 +40,14 @@ export default function Home() {
         
         updateTabs(newTabs);
 
-
+        // make a post request to update the data
+        fetch(`http://localhost:3000/tabs/${newTab.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newTab),
+        });
         
     };
 
@@ -48,7 +55,7 @@ export default function Home() {
       <Container>
         <Row>
         <DragDropContext onDragEnd={onCardDragEnd}>
-          {activeTab.tab.map((item, index) => (
+          {activeTab.lists && activeTab.lists.map((item, index) => (
             <List key={item.id} list={item} prefix={item.id}/>
           ))}
         </DragDropContext>

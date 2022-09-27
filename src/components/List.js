@@ -1,7 +1,6 @@
 import styled from "styled-components";
-import { TabsContext } from "../App.js";
 import Card from "./Card";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import {  Droppable, Draggable } from "react-beautiful-dnd";
 import React from "react";
 
 
@@ -11,6 +10,7 @@ const Container = styled.div`
     background-color: #d9d9d9;
     border-radius: 15px;
     min-height: 50px;
+    height: fit-content;
     min-width: 200px;
     padding: 10px;
     margin: 10px;
@@ -34,7 +34,7 @@ export default function List({ list, prefix }) {
               ref={provided.innerRef}
             >
                 <Title>{list.title}</Title>
-              {list.list.map((card, index) => (
+              {list.cards.map((card, index) => (
                 <Draggable
                   key={card.id}
                   draggableId={card.id.toString()}
