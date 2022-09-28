@@ -78,7 +78,7 @@ const AddButton = styled.div`
     background: linear-gradient(145deg, #474652, #3b3b45);
     box-shadow:  3px 3px 6px #2b2a32,
              -3px -3px 6px #595868;
-    &:hover {
+    &:not(:active):hover {
       background: linear-gradient(145deg, #3b3b45, #474652);
       box-shadow:  3px 3px 6px #2b2a32,
                   -3px -3px 6px #595868;

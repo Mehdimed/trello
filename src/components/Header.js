@@ -33,7 +33,7 @@ const HeaderButton = styled.div`
     cursor: default;
     // underline active tab
     &:hover {
-        background-color: ${props => props.active ? "#42414d" : "#35343a"}
+        background-color: ${props => props.small ? "#52525e" : props.active ? "#42414d" : "#35343a"}
     }
 `;
 
