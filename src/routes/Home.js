@@ -3,6 +3,8 @@ import { TabsContext } from "../App.js";
 import styled from "styled-components";
 import List from "../components/List.js";
 import { DragDropContext } from "react-beautiful-dnd";
+import { Trash } from "phosphor-react";
+
 
 
 const Container = styled.div`
@@ -15,9 +17,34 @@ const Row = styled.div`
     flex-direction: row;
 `;
 
+const AddButton = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 100px;
+    height: 35px;
+    margin-top: 10px;
+    border-radius: 10px;
+    background-color: #282c34;
+    color: white;
+    cursor: pointer;
+    &:hover {
+        background-color: #61dafb;
+        color: black;
+    }
+`;
+
+const trashStyle = {
+  color: 'red',
+  position: "absolute",
+  right: "30px",
+  bottom: "30px",
+  cursor: "pointer",
+}
+
 export default function Home() {
 
-    const { tabs, updateTabs, activeTab } = React.useContext(TabsContext);
+    const { tabs, updateTabs, updateActiveTab, activeTab, addList, deleteTab } = React.useContext(TabsContext);
 
     const onCardDragEnd = (result) => {
         if (!result.destination) {
@@ -39,6 +66,7 @@ export default function Home() {
         });
         
         updateTabs(newTabs);
+        updateActiveTab(newTab);
 
         // make a post request to update the data
         fetch(`http://localhost:3000/tabs/${newTab.id}`, {
@@ -54,12 +82,14 @@ export default function Home() {
     return (
       <Container>
         <Row>
-        <DragDropContext onDragEnd={onCardDragEnd}>
-          {activeTab.lists && activeTab.lists.map((item, index) => (
-            <List key={item.id} list={item} prefix={item.id}/>
-          ))}
-        </DragDropContext>
+          <DragDropContext onDragEnd={onCardDragEnd}>
+            {activeTab.lists && activeTab.lists.map((item, index) => (
+              <List key={item.id} list={item} prefix={item.id}/>
+            ))}
+          </DragDropContext>
+          <AddButton onClick={() => addList(activeTab)}>+</AddButton>
         </Row>
+        <Trash style={trashStyle} size="64px" onClick={() => deleteTab(activeTab)}/>
       </Container>
     );
     

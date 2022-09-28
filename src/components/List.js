@@ -2,9 +2,14 @@ import styled from "styled-components";
 import Card from "./Card";
 import {  Droppable, Draggable } from "react-beautiful-dnd";
 import React from "react";
+import { TabsContext } from "../App.js";
+import { Trash } from "phosphor-react";
+
+
 
 
 const Container = styled.div`
+    position: relative;
     display: flex;
     flex-direction: column;
     background-color: #d9d9d9;
@@ -22,7 +27,34 @@ const Title = styled.div`
     margin-bottom: 10px;
 `;
 
+const AddButton = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    min-width: 100px;
+    height: 20px;
+    border-radius: 10px;
+    background-color: #a2a2a2;
+    color: #232323;
+    cursor: pointer;
+    &:hover {
+        background-color: #61dafb;
+        color: black;
+    }
+`;
+
+const trashStyle = {
+  color: 'red',
+  position: "absolute",
+  right: "5px",
+  top: "10px",
+  cursor: "pointer",
+}
+
 export default function List({ list, prefix }) {
+
+  const { addCard, deleteList } = React.useContext(TabsContext);
 
     return (
         
@@ -46,12 +78,14 @@ export default function List({ list, prefix }) {
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                     >
-                      <Card card={card} />
+                      <Card card={card} parent={list}/>
                     </div>
                   )}
                 </Draggable>
               ))}
               {provided.placeholder}
+              <AddButton onClick={() => addCard(list)}>Add Card</AddButton>
+              <Trash style={trashStyle} size="24px" onClick={() => deleteList(list)}/>
             </Container>
           )}
       </Droppable>

@@ -11,7 +11,7 @@ const Container = styled.div`
     align-items: center;
     background-color: #282c34;
     color: white;
-    height: 35px;
+    height: 60px;
 `;
 
 const HeaderButton = styled.div`
@@ -31,7 +31,7 @@ const HeaderButton = styled.div`
 
 const Header = () => {
     
-    const { tabs, updateTabs, activeTab, updateActiveTab } = React.useContext(TabsContext);
+    const { tabs, updateTabs, activeTab, updateActiveTab, addTab } = React.useContext(TabsContext);
     return (
         <Container>
             {tabs.map((tab) => (
@@ -39,6 +39,7 @@ const Header = () => {
                     {tab.title}
                 </HeaderButton>
             ))}
+            <HeaderButton onClick={() => addTab()}>+</HeaderButton>
         </Container>
     )
 }
