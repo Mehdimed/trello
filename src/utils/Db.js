@@ -47,7 +47,8 @@ export default class Db {
           .then((data) => {
             const newTabs = [...this.tabs].filter((item) => item.id !== tab.id);
             this.updateTabs(newTabs);
-            this.updateActiveTab(newTabs[0]);
+            // redirect to the first tab if the deleted tab is the active tab
+            this.updateActiveTab(this.activeTab.id === tab.id ? newTabs[0] : this.activeTab);
           });
       }
     

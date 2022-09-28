@@ -1,7 +1,7 @@
 import styled, { keyframes } from "styled-components";
 import Card from "./Card";
 import {  Droppable, Draggable } from "react-beautiful-dnd";
-import React from "react";
+import React, { useState } from "react";
 import { TabsContext } from "../utils/context";
 import { X, Plus } from "phosphor-react";
 
@@ -90,7 +90,7 @@ const AddButton = styled.div`
                   inset -3px -3px 6px #595868;
     }
     &:not(:active) {
-      animation: ${declickAnimation} 0.1s linear;
+      animation: ${props => props.isClicked ? declickAnimation : null} 0.1s linear ;
       background: linear-gradient(145deg, #474652, #3b3b45);
       box-shadow:  3px 3px 6px #2b2a32,
               -3px -3px 6px #595868;
@@ -114,6 +114,8 @@ const ImgContainer = styled.div`
 `;
 
 export default function List({ list, prefix }) {
+
+  let [isClicked, setIsClicked] = useState(false);
   
 
   const db = React.useContext(TabsContext);
@@ -146,7 +148,12 @@ export default function List({ list, prefix }) {
                 </Draggable>
               ))}
               {provided.placeholder}
-              <AddButton onClick={() => setTimeout(() => db.addCard(list), 200)}>
+              <AddButton 
+                onClick={() => setTimeout(() => db.addCard(list), 200)} 
+                isClicked={isClicked}
+                onMouseDown={() => setIsClicked(true)}
+                onMouseUp={() => setTimeout(() => setIsClicked(false), 200)}
+                >
                 <Plus size={20} />
               </AddButton>
               <ImgContainer onClick={() => db.deleteList(list)}>
