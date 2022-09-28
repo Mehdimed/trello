@@ -19,6 +19,7 @@ const Container = styled.div`
     min-width: 200px;
     padding: 10px;
     margin: 10px;
+    transition: all 0.2s ease-in-out;
 `;
 
 const Title = styled.div`
@@ -53,6 +54,7 @@ const trashStyle = {
 }
 
 export default function List({ list, prefix }) {
+  
 
   const db = React.useContext(TabsContext);
 

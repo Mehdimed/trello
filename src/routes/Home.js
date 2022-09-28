@@ -65,8 +65,7 @@ export default function Home() {
             return tab;
         });
         
-        db.updateTabs(newTabs);
-        db.updateActiveTab(newTab);
+        
 
         // make a post request to update the data
         fetch(`http://localhost:3000/tabs/${newTab.id}`, {
@@ -75,6 +74,9 @@ export default function Home() {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(newTab),
+        }).then(() => {
+          db.updateTabs(newTabs);
+          db.updateActiveTab(newTab);
         });
         
     };
