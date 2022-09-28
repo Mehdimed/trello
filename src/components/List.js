@@ -3,7 +3,7 @@ import Card from "./Card";
 import {  Droppable, Draggable } from "react-beautiful-dnd";
 import React from "react";
 import { TabsContext } from "../utils/context";
-import { Trash, Plus } from "phosphor-react";
+import { X, Plus } from "phosphor-react";
 
 
 
@@ -84,26 +84,34 @@ const AddButton = styled.div`
                   -3px -3px 6px #595868;
     }
     &:active {
-      animation: ${clickAnimation} 0.1s ease-in-out;
+      animation: ${clickAnimation} 0.1s linear;
       background: #42414d;
       box-shadow: inset 3px 3px 6px #2b2a32,
                   inset -3px -3px 6px #595868;
     }
     &:not(:active) {
-      animation: ${declickAnimation} 0.1s ease-in-out;
+      animation: ${declickAnimation} 0.1s linear;
       background: linear-gradient(145deg, #474652, #3b3b45);
       box-shadow:  3px 3px 6px #2b2a32,
               -3px -3px 6px #595868;
     }
 `;
 
-const trashStyle = {
-  color: 'red',
-  position: "absolute",
-  right: "5px",
-  top: "10px",
-  cursor: "pointer",
-}
+const ImgContainer = styled.div`
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: 5px;
+    top: 5px;
+    border-radius: 5px;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    &:hover {
+        background-color: #55545f;
+    }
+`;
 
 export default function List({ list, prefix }) {
   
@@ -141,7 +149,9 @@ export default function List({ list, prefix }) {
               <AddButton onClick={() => setTimeout(() => db.addCard(list), 200)}>
                 <Plus size={20} />
               </AddButton>
-              <Trash style={trashStyle} size="24px" onClick={() => db.deleteList(list)}/>
+              <ImgContainer onClick={() => db.deleteList(list)}>
+                <X size="24px" />
+              </ImgContainer>
             </Container>
           )}
       </Droppable>

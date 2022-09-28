@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Backspace } from "phosphor-react";
+import { Backspace, Trash } from "phosphor-react";
 import React from "react";
 import { TabsContext } from "../utils/context";
 
@@ -7,6 +7,7 @@ const Container = styled.div`
     position: relative;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     color: white;
     border-radius: 10px;
     padding: 5px;
@@ -26,13 +27,24 @@ const Description = styled.div`
     font-weight: 400;
 `;
 
-const trashStyle = {
+const iconStyle = {
   color: 'red',
-  position: "absolute",
-  right: "5px",
-  top: "10px",
-  cursor: "pointer",
 }
+
+const ImgContainer = styled.div`
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: 5px;
+    border-radius: 5px;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    &:hover {
+        background-color: #55545f;
+    }
+`;
 
 
 export default function Card({ card, parent }) {
@@ -44,7 +56,9 @@ export default function Card({ card, parent }) {
         <Title>{card.title}</Title>
         <Description>{card.description}</Description>
         {/* red cross to delete the card */}
-        <Backspace style={trashStyle} onClick={() => db.deleteCard(card, parent)}/>
+        <ImgContainer onClick={() => db.deleteCard(card, parent)}>
+          <Trash style={iconStyle} />
+        </ImgContainer>
       </Container>
     )
   }
