@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Backspace } from "phosphor-react";
 import React from "react";
-import { TabsContext } from "../App";
+import { TabsContext } from "../utils/context";
 
 const Container = styled.div`
     position: relative;
@@ -34,14 +34,14 @@ const trashStyle = {
 
 export default function Card({ card, parent }) {
 
-  const { deleteCard } = React.useContext(TabsContext);
+  const db = React.useContext(TabsContext);
 
     return (
       <Container>
         <Title>{card.title}</Title>
         <Description>{card.description}</Description>
         {/* red cross to delete the card */}
-        <Backspace style={trashStyle} onClick={() => deleteCard(card, parent)}/>
+        <Backspace style={trashStyle} onClick={() => db.deleteCard(card, parent)}/>
       </Container>
     )
   }

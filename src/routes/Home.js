@@ -1,5 +1,5 @@
 import React from "react";
-import { TabsContext } from "../App.js";
+import { TabsContext } from "../utils/context";
 import styled from "styled-components";
 import List from "../components/List.js";
 import { DragDropContext } from "react-beautiful-dnd";
@@ -44,13 +44,13 @@ const trashStyle = {
 
 export default function Home() {
 
-    const { tabs, updateTabs, updateActiveTab, activeTab, addList, deleteTab } = React.useContext(TabsContext);
+    const db = React.useContext(TabsContext);
 
     const onCardDragEnd = (result) => {
         if (!result.destination) {
             return;
         }
-        const newTab = { ...activeTab };
+        const newTab = { ...db.activeTab };
         const sourceId = result.source.droppableId.split("-")[1];
         const destinationId = result.destination.droppableId.split("-")[1];        
         const sourceList = newTab.lists.find((list) => list.id.toString() === sourceId);
@@ -58,15 +58,15 @@ export default function Home() {
         const [removed] = sourceList.cards.splice(result.source.index, 1);
         destinationList.cards.splice(result.destination.index, 0, removed);
 
-        const newTabs = [...tabs].map((tab) => {
+        const newTabs = [...db.tabs].map((tab) => {
             if (tab.id === newTab.id) {
                 return newTab;
             }
             return tab;
         });
         
-        updateTabs(newTabs);
-        updateActiveTab(newTab);
+        db.updateTabs(newTabs);
+        db.updateActiveTab(newTab);
 
         // make a post request to update the data
         fetch(`http://localhost:3000/tabs/${newTab.id}`, {
@@ -83,13 +83,13 @@ export default function Home() {
       <Container>
         <Row>
           <DragDropContext onDragEnd={onCardDragEnd}>
-            {activeTab.lists && activeTab.lists.map((item, index) => (
+            {db.activeTab.lists && db.activeTab.lists.map((item, index) => (
               <List key={item.id} list={item} prefix={item.id}/>
             ))}
           </DragDropContext>
-          <AddButton onClick={() => addList(activeTab)}>+</AddButton>
+          <AddButton onClick={() => db.addList(db.activeTab)}>+</AddButton>
         </Row>
-        <Trash style={trashStyle} size="64px" onClick={() => deleteTab(activeTab)}/>
+        <Trash style={trashStyle} size="64px" onClick={() => db.deleteTab(db.activeTab)}/>
       </Container>
     );
     

@@ -1,9 +1,9 @@
 import React from "react";
-import { TabsContext } from "../App.js";
+import { TabsContext } from "../utils/context";
 
 export default function User() {
 
-    const { tabs, updateTabs } = React.useContext(TabsContext);
+    // const db = React.useContext(TabsContext);
 
   return (
     <div>

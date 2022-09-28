@@ -1,7 +1,7 @@
 // basic header
 import React from "react";
 import styled from "styled-components";
-import { TabsContext } from "../App.js";
+import { TabsContext } from "../utils/context";
 
 
 const Container = styled.div`
@@ -31,15 +31,15 @@ const HeaderButton = styled.div`
 
 const Header = () => {
     
-    const { tabs, updateTabs, activeTab, updateActiveTab, addTab } = React.useContext(TabsContext);
+    const db = React.useContext(TabsContext);
     return (
         <Container>
-            {tabs.map((tab) => (
-                <HeaderButton key={tab.id} onClick={() => updateActiveTab(tab)} active={tab === activeTab}>
+            {db.tabs.map((tab) => (
+                <HeaderButton key={tab.id} onClick={() => db.updateActiveTab(tab)} active={tab === db.activeTab}>
                     {tab.title}
                 </HeaderButton>
             ))}
-            <HeaderButton onClick={() => addTab()}>+</HeaderButton>
+            <HeaderButton onClick={() => db.addTab()}>+</HeaderButton>
         </Container>
     )
 }

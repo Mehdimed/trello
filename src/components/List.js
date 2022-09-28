@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Card from "./Card";
 import {  Droppable, Draggable } from "react-beautiful-dnd";
 import React from "react";
-import { TabsContext } from "../App.js";
+import { TabsContext } from "../utils/context";
 import { Trash } from "phosphor-react";
 
 
@@ -54,7 +54,7 @@ const trashStyle = {
 
 export default function List({ list, prefix }) {
 
-  const { addCard, deleteList } = React.useContext(TabsContext);
+  const db = React.useContext(TabsContext);
 
     return (
         
@@ -84,8 +84,8 @@ export default function List({ list, prefix }) {
                 </Draggable>
               ))}
               {provided.placeholder}
-              <AddButton onClick={() => addCard(list)}>Add Card</AddButton>
-              <Trash style={trashStyle} size="24px" onClick={() => deleteList(list)}/>
+              <AddButton onClick={() => db.addCard(list)}>Add Card</AddButton>
+              <Trash style={trashStyle} size="24px" onClick={() => db.deleteList(list)}/>
             </Container>
           )}
       </Droppable>
