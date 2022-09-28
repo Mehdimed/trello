@@ -13,11 +13,11 @@ export default class Db {
           title: "New Tab",
           lists: [
             {
-              id: Math.floor(Math.random() * 1000),
+              id: Math.floor(Math.random() * 10000000),
               title: "List 1",
               cards: [
                 {
-                  id: Math.floor(Math.random() * 1000),
+                  id: Math.floor(Math.random() * 10000000),
                   title: "Card 1",
                   description: "Description 1",
                 }
@@ -55,13 +55,13 @@ export default class Db {
     
       addList = (tab) => {
         const newTab = { ...tab };
-        const listId = Math.floor(Math.random() * 1000);
+        const listId = Math.floor(Math.random() * 10000000);
         const newCard = {
           id: listId,
           title: `List ${listId}`,
           cards: [
             {
-              id: Math.floor(Math.random() * 1000),
+              id: Math.floor(Math.random() * 10000000),
               title: `Card 1`,
               description: `Description 1`,
             }
@@ -110,8 +110,8 @@ export default class Db {
       addCard = (list) => {
         const newTab = { ...this.activeTab };
         const newList = newTab.lists.find((item) => item.id === list.id);
-        // generate a random id
-        const cardId = Math.floor(Math.random() * 1000);
+        // generate a random id with 8 digits
+        const cardId = Math.floor(Math.random() * 10000000);
         const newCard = {
           id: cardId,
           title: `Card ${cardId}`,

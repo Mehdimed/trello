@@ -3,7 +3,7 @@ import { TabsContext } from "../utils/context";
 import styled from "styled-components";
 import List from "../components/List.js";
 import { DragDropContext } from "react-beautiful-dnd";
-import { Trash } from "phosphor-react";
+import { Plus } from "phosphor-react";
 
 
 
@@ -18,29 +18,22 @@ const Row = styled.div`
 `;
 
 const AddButton = styled.div`
+    margin: 10px;
     display: flex;
-    justify-content: center;
     align-items: center;
-    min-width: 100px;
-    height: 35px;
-    margin-top: 10px;
-    border-radius: 10px;
-    background-color: #282c34;
+    justify-content: center;
+    border-radius: 5px;
+    min-width: 44px;
+    background-color: #2b2a33;
+    height: 126px;
     color: white;
-    cursor: pointer;
+    cursor: default;
+    // underline active tab
     &:hover {
-        background-color: #61dafb;
-        color: black;
+        background-color: #42414d;
     }
 `;
 
-const trashStyle = {
-  color: 'red',
-  position: "absolute",
-  right: "30px",
-  bottom: "30px",
-  cursor: "pointer",
-}
 
 export default function Home() {
 
@@ -85,13 +78,16 @@ export default function Home() {
       <Container>
         <Row>
           <DragDropContext onDragEnd={onCardDragEnd}>
-            {db.activeTab.lists && db.activeTab.lists.map((item, index) => (
+            {db.activeTab?.lists && db.activeTab.lists.map((item, index) => (
               <List key={item.id} list={item} prefix={item.id}/>
             ))}
           </DragDropContext>
-          <AddButton onClick={() => db.addList(db.activeTab)}>+</AddButton>
+          {db.activeTab && 
+            <AddButton onClick={() => db.addList(db.activeTab)}>
+              <Plus size={24} />
+            </AddButton>
+          }
         </Row>
-        <Trash style={trashStyle} size="64px" onClick={() => db.deleteTab(db.activeTab)}/>
       </Container>
     );
     

@@ -1,9 +1,9 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import Card from "./Card";
 import {  Droppable, Draggable } from "react-beautiful-dnd";
 import React from "react";
 import { TabsContext } from "../utils/context";
-import { Trash } from "phosphor-react";
+import { Trash, Plus } from "phosphor-react";
 
 
 
@@ -12,8 +12,9 @@ const Container = styled.div`
     position: relative;
     display: flex;
     flex-direction: column;
-    background-color: #d9d9d9;
-    border-radius: 15px;
+    background-color: #42414d;
+    color: white;
+    border-radius: 5px;
     min-height: 50px;
     height: fit-content;
     min-width: 200px;
@@ -25,8 +26,43 @@ const Container = styled.div`
 const Title = styled.div`
     font-size: 17px;
     font-weight: 600;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 `;
+
+const clickAnimation = keyframes`
+    0% {
+      background: linear-gradient(145deg, #3b3b45, #474652);
+      box-shadow:  3px 3px 6px #2b2a32,
+                  -3px -3px 6px #595868;
+    }
+    50% {
+      background: #42414d;
+      box-shadow:  none;
+    }
+    100% {
+      background: #42414d;
+      box-shadow: inset 3px 3px 6px #2b2a32,
+                  inset -3px -3px 6px #595868;
+    }
+`;
+const declickAnimation = keyframes`
+    0% {
+          background: #42414d;
+          box-shadow: inset 3px 3px 6px #2b2a32,
+                      inset -3px -3px 6px #595868;
+        }
+    50% {
+      background: #42414d;
+      box-shadow:  none;
+    }
+    100% {
+      background: linear-gradient(145deg, #3b3b45, #474652);
+      box-shadow:  3px 3px 6px #2b2a32,
+                  -3px -3px 6px #595868;
+    }
+    
+`;
+
 
 const AddButton = styled.div`
     display: flex;
@@ -35,13 +71,29 @@ const AddButton = styled.div`
     align-self: center;
     min-width: 100px;
     height: 20px;
-    border-radius: 10px;
-    background-color: #a2a2a2;
-    color: #232323;
+    border-radius: 5px;
+    color: white;
+    animation: all 0.5s ease-in-out;
     cursor: pointer;
+    background: linear-gradient(145deg, #474652, #3b3b45);
+    box-shadow:  3px 3px 6px #2b2a32,
+             -3px -3px 6px #595868;
     &:hover {
-        background-color: #61dafb;
-        color: black;
+      background: linear-gradient(145deg, #3b3b45, #474652);
+      box-shadow:  3px 3px 6px #2b2a32,
+                  -3px -3px 6px #595868;
+    }
+    &:active {
+      animation: ${clickAnimation} 0.1s ease-in-out;
+      background: #42414d;
+      box-shadow: inset 3px 3px 6px #2b2a32,
+                  inset -3px -3px 6px #595868;
+    }
+    &:not(:active) {
+      animation: ${declickAnimation} 0.1s ease-in-out;
+      background: linear-gradient(145deg, #474652, #3b3b45);
+      box-shadow:  3px 3px 6px #2b2a32,
+              -3px -3px 6px #595868;
     }
 `;
 
@@ -86,7 +138,9 @@ export default function List({ list, prefix }) {
                 </Draggable>
               ))}
               {provided.placeholder}
-              <AddButton onClick={() => db.addCard(list)}>Add Card</AddButton>
+              <AddButton onClick={() => setTimeout(() => db.addCard(list), 200)}>
+                <Plus size={20} />
+              </AddButton>
               <Trash style={trashStyle} size="24px" onClick={() => db.deleteList(list)}/>
             </Container>
           )}

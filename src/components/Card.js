@@ -7,10 +7,13 @@ const Container = styled.div`
     position: relative;
     display: flex;
     flex-direction: column;
-    background-color: #ffffff;
+    color: white;
     border-radius: 10px;
     padding: 5px;
     margin-bottom: 15px;
+    background: #42414d;
+    box-shadow:  3px 3px 6px #2b2a32,
+             -3px -3px 6px #595868;
 `;
 
 const Title = styled.div`
